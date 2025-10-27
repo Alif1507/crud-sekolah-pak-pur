@@ -1,0 +1,52 @@
+# docker-compose.yml
+services:
+  app:
+    build: .
+    container_name: crud-sekolah-app
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      # pass DB envs so config.php can read them (see step 3)
+      DB_HOST: db
+      DB_NAME: sekolah
+      DB_USER: root
+      DB_PASS: mawkeren
+    volumes:
+      - ./:/var/www/html:rw
+
+  db:
+    image: mariadb:11
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p$MYSQL_ROOT_PASSWORD"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+    container_name: crud-sekolah-db
+    environment:
+      MYSQL_ROOT_PASSWORD: mawkeren
+      MYSQL_DATABASE: sekolah
+      MYSQL_USER: root
+      MYSQL_PASSWORD: mawkeren
+    ports:
+      - "3307:3306"   # optional expose to host
+    volumes:
+      - dbdata:/var/lib/mysql
+      # auto-seed schema + sample data on first run
+      - ./migrations.sql:/docker-entrypoint-initdb.d/01_migrations.sql:ro
+
+  phpmyadmin:
+    image: phpmyadmin:5
+    container_name: crud-sekolah-pma
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      UPLOAD_LIMIT: 64M
+    ports:
+      - "8081:80"
+
+volumes:
+  dbdata:
