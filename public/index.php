@@ -1,4 +1,7 @@
 <?php
+require_once __DIR__ . '/../config.php';
+auth_require_login();
+
 $title = 'Dashboard';
 ob_start(); ?>
 <div class="row g-3">

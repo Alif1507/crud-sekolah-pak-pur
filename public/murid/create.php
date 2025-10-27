@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../../config.php';
+auth_require_login();
 $title = 'Tambah Murid';
 
 $errors = [];

@@ -1,4 +1,6 @@
-<?php // public/layout.php ?>
+<?php 
+
+?>
 <!doctype html>
 <html lang="id">
 <head>
@@ -13,6 +15,7 @@
   <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
+<?php $me = auth_current_user(); ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm sticky-top">
   <div class="container">
     <a class="navbar-brand fw-semibold" href="/index.php">CRUD Sekolah</a>
@@ -20,9 +23,15 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div id="nav" class="collapse navbar-collapse">
-      <div class="navbar-nav ms-auto gap-1">
+      <div class="navbar-nav ms-auto gap-1 align-items-lg-center">
         <a class="nav-link" href="/murid/index.php">Murid</a>
         <a class="nav-link" href="/nilai/index.php">Nilai</a>
+        <?php if ($me): ?>
+          <span class="navbar-text ms-2 me-2 small text-muted">Hi, <?= htmlspecialchars($me['name']) ?></span>
+          <a class="btn btn-sm btn-secondary" href="/auth/logout.php">Logout</a>
+        <?php else: ?>
+          <a class="btn btn-sm btn-primary" href="/auth/login.php">Login</a>
+        <?php endif; ?>
       </div>
     </div>
   </div>

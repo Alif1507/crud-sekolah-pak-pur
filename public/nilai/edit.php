@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../../config.php';
+auth_require_login();
 $title = 'Edit Nilai';
 
 $id = (int)($_GET['id'] ?? 0);
