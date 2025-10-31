@@ -39,7 +39,7 @@ ob_start(); ?>
             <button class="btn btn-primary">Masuk</button>
             <a class="btn btn-secondary" href="/">Batal</a>
           </div>
-          <p class="text-muted small mt-3 mb-0">User default: <code>admin</code> / <code>password</code></p>
+          <!-- <p class="text-muted small mt-3 mb-0">User default: <code>admin</code> / <code>password</code></p> -->
         </form>
       </div>
     </div>
